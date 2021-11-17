@@ -1,4 +1,5 @@
 <template>
+<div></div>
 <!--	<div id="container">-->
 <!--		<transition :appear="true">-->
 <!--		<el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">-->
