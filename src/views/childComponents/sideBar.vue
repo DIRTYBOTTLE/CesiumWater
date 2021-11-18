@@ -13,16 +13,16 @@
 
             <span> 影像数据 </span>
           </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
+          <el-menu-item-group title="影像组1">
+            <el-menu-item index="1-1">影像数据1</el-menu-item>
+            <el-menu-item index="1-2">影像数据2</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
+          <el-menu-item-group title="影像组2">
+            <el-menu-item index="1-3">影像数据3</el-menu-item>
           </el-menu-item-group>
           <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
+            <template #title>影像数据4</template>
+            <el-menu-item index="1-4-1">拼接影像</el-menu-item>
           </el-sub-menu>
         </el-sub-menu>
         <el-menu-item index="2">
@@ -35,7 +35,7 @@
         </el-menu-item>
         <el-menu-item index="4">
           <el-icon><setting /></el-icon>
-          <span> navigator four </span>
+          <span> 设置 </span>
         </el-menu-item>
       </el-menu>
     </el-col>
@@ -76,10 +76,10 @@ export default defineComponent({
 <style scoped>
 .tac {
   position: absolute;
-  height: 100%;
+  height: 90%;
   width: 400px;
 }
 .el-menu-vertical-demo {
-  height: 100%;
+  height: 80%;
 }
 </style>

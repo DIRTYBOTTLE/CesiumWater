@@ -3,6 +3,11 @@
 </template>
 
 <script>
+import { Vector as SourceVec } from "ol/source";
+import { Feature } from "ol";
+import { Point } from "ol/geom";
+import { Style, Icon } from "ol/style";
+import { Vector as LayerVec } from "ol/layer";
 export default {
   name: "uasMap",
   data() {
@@ -78,6 +83,7 @@ export default {
   },
   mounted() {
     this.initMap();
+    this.vectorTileLayer();
   },
   methods: {
     initMap() {
@@ -95,6 +101,31 @@ export default {
         }),
       });
     },
+    vectorTileLayer() {
+      // 创建矢量容器
+      var vectorSource = new SourceVec({});
+      //创建图标特性
+      var iconFeature = new Feature({
+        geometry: new Point([120.962527939, 29.415279039], "XY"),
+      });
+
+      //将图标特性添加进矢量中
+      vectorSource.addFeature(iconFeature);
+      //创建图标样式
+      var iconStyle = new Style({
+        image: new Icon({
+          opacity: 0.75,
+          src: "./js/logo.png",
+        }),
+      });
+      //创建矢量层
+      var vectorLayer = new LayerVec({
+        source: vectorSource,
+        style: iconStyle,
+      });
+      //添加进map
+      this.map.addLayer(vectorLayer);
+    },
   },
 };
 </script>
@@ -102,7 +133,7 @@ export default {
 <style scoped>
 .map {
   position: absolute;
-  height: 100%;
+  height: 90%;
   left: 200px;
   width: 100%;
 }
