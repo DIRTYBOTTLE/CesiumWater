@@ -7,8 +7,6 @@ declare module 'vue' {
     AButton: typeof import('ant-design-vue/es')['Button']
     Cesium: typeof import('./src/components/Cesium.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    LayerItem: typeof import('./src/components/LayerItem.vue')['default']
-    LayerList: typeof import('./src/components/LayerList.vue')['default']
     LayerSetting: typeof import('./src/components/LayerSetting.vue')['default']
     SettingItem: typeof import('./src/components/SettingItem.vue')['default']
   }

@@ -1,155 +1,122 @@
 <template>
 	<div style="height: 100%">
 		<a-layout>
-<!--			<a-layout-sider v-model:collapsed="collapsed" collapsedWidth="0" collapsible="false" defaultCollapsed>-->
-				<a-layout-sider collapsible="true" defaultCollapsed="true">
-<!--				<div class="logo" />-->
+			<!--侧边导航栏-->
+			<a-layout-sider collapsible="true" defaultCollapsed="true">
 				<a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-
-					<a-menu-item key="1" @click="changeShow">
-						<file-outlined />
+					<a-menu-item key="11" @click="changeLayerCheck">
+						<EyeOutlined />
 						<span>要素展示</span>
 					</a-menu-item>
 
-					<a-menu-item key="2" @click="changeSetting">
-						<desktop-outlined />
+					<a-menu-item key="22" @click="changeSetting">
+						<SettingOutlined />
 						<span>参数调整</span>
 					</a-menu-item>
 
-					<a-menu-item key="3" @click="flyToArea">
-						<pie-chart-outlined />
-						<span>示范区</span>
-					</a-menu-item>
-<!--					<a-sub-menu key="sub1">-->
-<!--						<template #title>-->
-<!--            <span>-->
-<!--              <user-outlined />-->
-<!--              <span>User</span>-->
-<!--            </span>-->
-<!--						</template>-->
-<!--						<a-menu-item key="3">Tom</a-menu-item>-->
-<!--						<a-menu-item key="4">Bill</a-menu-item>-->
-<!--						<a-menu-item key="5">Alex</a-menu-item>-->
-<!--					</a-sub-menu>-->
-
-<!--					<a-sub-menu key="sub2">-->
-<!--						<template #title>-->
-<!--            <span>-->
-<!--              <team-outlined />-->
-<!--              <span>Team</span>-->
-<!--            </span>-->
-<!--						</template>-->
-<!--						<a-menu-item key="6">Team 1</a-menu-item>-->
-<!--						<a-menu-item key="8">Team 2</a-menu-item>-->
-<!--					</a-sub-menu>-->
-
-<!--					<a-menu-item key="9">-->
-<!--						<file-outlined />-->
-<!--						<span>File</span>-->
-<!--					</a-menu-item>-->
-
+					<a-sub-menu key="sub1">
+						<template #title>
+							<span>
+              	<EnvironmentOutlined />
+              	<span>示范区</span>
+            	</span>
+						</template>
+						<a-menu-item key="33" @click="flyToArea">绵阳示范区</a-menu-item>
+						<a-menu-item key="44">于都示范区</a-menu-item>
+					</a-sub-menu>
 				</a-menu>
 			</a-layout-sider>
 
+      <!--内容展示区-->
 			<a-layout>
-				<div style="position: relative;height: 100%">
+				<div style="position:relative;height:100%">
 					<div class="cesium-container" ref="mapRef" style="height: 100%"/>
-					<LayerList :layerInfos="layerInfos" @layerShow="layerShow" @flyToArea="flyToArea" ref="layerList"></LayerList>
 					<LayerSetting ref="layerSetting"></LayerSetting>
+
+					<a-tree
+							v-model:selectedKeys="selectedKeys"
+							checkable
+							:tree-data="treeData"
+							style="position: absolute;top: 0px;color: white"
+							@check="layerShow"
+							v-show="layerCheck"
+					>
+						<template #title="{ title, key } ">
+							{{ title }}
+						</template>
+					</a-tree>
+
 				</div>
-<!--				<a-layout-header style="background: #fff; padding: 0" />-->
-<!--				<a-layout-content style="margin: 0 16px">-->
-<!--					<a-breadcrumb style="margin: 16px 0">-->
-<!--						<a-breadcrumb-item>User</a-breadcrumb-item>-->
-<!--						<a-breadcrumb-item>Bill</a-breadcrumb-item>-->
-<!--					</a-breadcrumb>-->
-<!--					<div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">-->
-<!--						Bill is a cat.-->
-<!--					</div>-->
-<!--				</a-layout-content>-->
-<!--				<a-layout-footer style="text-align: center">-->
-<!--					Ant Design ©2018 Created by Ant UED-->
-<!--				</a-layout-footer>-->
 			</a-layout>
+
 		</a-layout>
 	</div>
 </template>
 
-<script>
-import { PieChartOutlined, DesktopOutlined, UserOutlined, TeamOutlined, FileOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-	components: {
-		PieChartOutlined,
-		DesktopOutlined,
-		UserOutlined,
-		TeamOutlined,
-		FileOutlined,
-	},
-
-	data() {
-		return {
-			collapsed: ref(false),
-			selectedKeys: ref(['1']),
-		};
-	},
-
-});
-</script>
-
 <script setup>
 import * as Cesium from 'cesium';
 import * as Vue from 'vue';
-import {getWFS} from '../js/CeisiumFuns'
-import LayerList from "./LayerList.vue";
+import {getWFS,flyToArea,layerShow1} from '../js/CeisiumFuns'
 import LayerSetting from "./LayerSetting.vue";
 
+/**********图层信息**********/
 const layerInfos = [
 	{workSpace:'water',layerName:'WaterSurface',reference:true,checkName:'地表水源',icon:"地表水源",loaded:false},
 	{workSpace:'water',layerName:'WaterUnder',reference:true,checkName:'地下水源',icon:"地下水源",loaded: false},
+	{workSpace:'geology',layerName:'GeologyYuDu',reference:false,checkName:'于都地质',icon:"",loaded: false},
 	{workSpace:'water',layerName:'Spring',reference:true,checkName:'泉',icon:"泉",loaded: false},
 	{workSpace:'water',layerName:'Well',reference:true,checkName:'井',icon:"井",loaded: false},
 	{workSpace:'water',layerName:'Drill',reference:true,checkName:'钻井',icon:"钻井",loaded: false},
 	{workSpace:'water',layerName:'WaterLine',reference:false,checkName:'水系',icon:"",loaded: false},
 	{workSpace:'map',layerName:'hjb',reference:true,checkName:'黄家坝',icon:"黄家坝",loaded: false},
 ];
-
-let viewer;
-
-const layerShow = (id)=>{
-	if(!layerInfos[id].loaded){
-		getWFS(viewer,layerInfos[id]);
-		layerInfos[id].loaded = true;
-		return
-	}
-	if(layerInfos[id].loaded){
-		viewer.dataSources.getByName(layerInfos[id].checkName)[0].show = !viewer.dataSources.getByName(layerInfos[id].checkName)[0].show;
-	}
-}
-
-const flyToArea = () =>{
-	viewer.camera.flyTo({
-		destination : new Cesium.Cartesian3(-1359527.881887964, 5251080.84182769, 3347486.3154035173),
-		orientation: {
-			heading : 0.6321958327174828,
-			pitch : -0.29359391259896683,
-			//   roll : 0.0                             // default value
+/**********图层选择器信息**********/
+const treeData = [
+	{
+		title: '地表水源',
+		key: '-1',
+		children: [{title: 'I 级水源', key: '0'},
+			{title: 'II 级水源', key: '1'},
+			{title: 'III 级水源', key: '2'}],
+	},
+	{
+		title: '地下水源',
+		key: '-2',
+		children: [{title: 'I 级水源', key: '3'},
+			{title: 'II 级水源', key: '4'},
+			{title: 'III 级水源', key: '5'}],
+	},
+];
+/**********图层显示**********/
+const layerShow = (checkedKeys,e)=>{
+	if(e.node.eventKey=="-1"){
+		for (let i = 0; i < 3; i++){
+			layerShow1(layerInfos,i);
 		}
-	});
+		return;
+	}
+	if(e.node.eventKey=="-2"){
+		for (let i = 3; i < 6; i++){
+			layerShow1(layerInfos,i);
+		}
+		return;
+	}
+	layerShow1(layerInfos,e.node.eventKey);
 }
-
-const mapRef = Vue.ref(null);
-const layerSetting = Vue.ref(null);
-const layerList = Vue.ref(null);
-
-const changeShow = ()=>{
-	layerList.value.isShow=!layerList.value.isShow
+/**********图层框显示**********/
+let layerCheck = new Vue.ref(false);
+const changeLayerCheck= ()=>{
+	layerCheck.value=!layerCheck.value;
 };
-
+/**********设置框显示**********/
+const layerSetting = Vue.ref(null);
 const changeSetting = ()=>{
 	layerSetting.value.isShow=!layerSetting.value.isShow
 }
 
+
+let viewer;
+const mapRef = Vue.ref(null);
 Vue.onMounted(() => {
 
   viewer = new Cesium.Viewer(mapRef.value,{
@@ -285,6 +252,93 @@ Vue.onMounted(() => {
 	// }
 
 });
+
+</script>
+
+<script>
+import { EyeOutlined , SettingOutlined, EnvironmentOutlined } from '@ant-design/icons-vue';
+import { defineComponent, ref, watch } from 'vue';
+
+// const treeData = [
+// 		{
+// 			title: '地表水源',
+// 			key: '0-0',
+// 			children: [{title: 'I 级水源', key: '0-0-0'},
+// 				{title: 'II 级水源', key: '0-0-1'},
+// 				{title: 'III 级水源', key: '0-0-2'}],
+// 		},
+// 		{
+// 			title: '地下水源',
+// 			key: '0-1',
+// 			children: [{title: 'I 级水源', key: '0-1-0'},
+// 				{title: 'II 级水源', key: '0-1-1'},
+// 				{title: 'III 级水源', key: '0-1-2'}],
+// 		},
+// ];
+
+
+
+// export default defineComponent({
+// 	setup() {
+//
+// 		watch(expandedKeys, () => {
+// 			console.log('expandedKeys', expandedKeys);
+// 		});
+// 		watch(selectedKeys, () => {
+// 			console.log('selectedKeys', selectedKeys);
+// 		});
+// 		watch(checkedKeys, () => {
+// 			console.log('checkedKeys', checkedKeys);
+// 		});
+// 		return {
+// 			treeData,
+// 			expandedKeys,
+// 			selectedKeys,
+// 			checkedKeys,
+// 		};
+// 	},
+//
+// });
+
+export default defineComponent({
+	components: {
+		EyeOutlined,
+		SettingOutlined,
+		EnvironmentOutlined
+	},
+
+	// setup() {
+	// 	const expandedKeys = ref(['0-0-0', '0-0-1']);
+	// 	const selectedKeys = ref(['0-0-0', '0-0-1']);
+	// 	const checkedKeys = ref(['0-0-0', '0-0-1']);
+	// 	watch(expandedKeys, () => {
+	// 		console.log('expandedKeys', expandedKeys);
+	// 	});
+	// 	watch(selectedKeys, () => {
+	// 		console.log('selectedKeys', selectedKeys);
+	// 	});
+	// 	watch(checkedKeys, () => {
+	// 		console.log('checkedKeys', checkedKeys);
+	// 	});
+	// 	return {
+	// 		treeData,
+	// 		expandedKeys,
+	// 		selectedKeys,
+	// 		checkedKeys,
+	// 	};
+	// },
+//
+	data() {
+		return {
+			collapsed: ref(false),
+			selectedKeys: ref(['1']),
+		};
+	},
+
+});
+
+
+
 
 </script>
 

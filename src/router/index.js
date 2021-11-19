@@ -4,10 +4,9 @@ import {
 } from 'vue-router'
 // import Cookies from 'js-cookie'
 import Home from '../components/Home.vue'
-import Cesium from '../components/CesiumTest.vue'
-// import HomeTest from '../components/HomeTest.vue'
+import Cesium from '../components/Cesium.vue'
 import Water from '../components/Water.vue'
-
+import Test from '../components/Test.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -17,6 +16,7 @@ const router = createRouter({
             children: [
                 { path: "cesium", name: 'cesium', component: Cesium },
                 { path: "water", name: 'water', component: Water },
+                { path: "test", name: 'test', component: Test },
             ]
         },
     ]
