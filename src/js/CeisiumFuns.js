@@ -37,6 +37,11 @@ function flyToArea(){
     });
 }
 
+function flyTo(lon,lat){
+    // viewer.camera.flyTo({destination : Cesium.Cartesian3.fromDegrees(-117.16, 32.71, 15000.0)});
+    viewer.camera.flyTo({destination : Cesium.Cartesian3.fromDegrees(lon, lat, 500.0)});
+}
+
 function layerShow1(layerInfos,id){
     if(!layerInfos[id].loaded){
         getWFS(viewer,layerInfos[id]);
@@ -51,5 +56,6 @@ function layerShow1(layerInfos,id){
 export {
     getWFS,
     flyToArea,
-    layerShow1
+    layerShow1,
+    flyTo
 }

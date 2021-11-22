@@ -65,16 +65,38 @@
 						<span>参数调整</span>
 					</a-menu-item>
 
-					<a-sub-menu key="sub1">
+<!--					<a-sub-menu key="sub1">-->
+<!--						<template #title>-->
+<!--							<span>-->
+<!--              	<EnvironmentOutlined />-->
+<!--              	<span>示范区</span>-->
+<!--            	</span>-->
+<!--						</template>-->
+<!--						<a-menu-item key="33" @click="flyToArea">绵阳示范区</a-menu-item>-->
+<!--						<a-menu-item key="44">于都示范区</a-menu-item>-->
+
+<!--					</a-sub-menu>-->
+
+					<a-sub-menu key="sub2">
 						<template #title>
 							<span>
               	<EnvironmentOutlined />
               	<span>示范区</span>
             	</span>
 						</template>
-						<a-menu-item key="33" @click="flyToArea">绵阳示范区</a-menu-item>
-						<a-menu-item key="44">于都示范区</a-menu-item>
+						<a-menu-item key="542" @click="flyToArea">绵阳示范区</a-menu-item>
+						<a-sub-menu key="sub3" title="于都示范区">
+							<a-menu-item key="754" @click="flyTo(115.539675,25.997803)">塘贯村</a-menu-item>
+							<a-menu-item key="854" @click="flyTo(115.199193,25.920731)">峡山小学</a-menu-item>
+							<a-menu-item key="894" @click="flyTo(115.194169,25.946653)">峡山村</a-menu-item>
+							<a-menu-item key="834" @click="flyTo(115.320556,25.763056)">长源村</a-menu-item>
+							<a-menu-item key="851" @click="flyTo(115.496744,25.946822)">潭头社区</a-menu-item>
+						</a-sub-menu>
 					</a-sub-menu>
+
+
+
+
 				</a-menu>
 			</a-layout-sider>
 
@@ -107,12 +129,13 @@
 <script setup>
 import * as Cesium from 'cesium';
 import * as Vue from 'vue';
-import {getWFS,flyToArea,layerShow1} from '../js/CeisiumFuns'
+import {getWFS,flyToArea,layerShow1,flyTo} from '../js/CeisiumFuns'
 import LayerSetting from "./LayerSetting.vue";
 
 /**********图层信息**********/
 const layerInfos = [
 	{workSpace:'water',layerName:'WaterSurface',reference:true,checkName:'地表水源',icon:"地表水源",loaded:false},
+	{workSpace:'well',layerName:'JiangXi',reference:true,checkName:'地下水源',icon:"泉",loaded: false},
 	{workSpace:'water',layerName:'WaterUnder',reference:true,checkName:'地下水源',icon:"地下水源",loaded: false},
 	{workSpace:'geology',layerName:'GeologyYuDu',reference:false,checkName:'于都地质',icon:"",loaded: false},
 	{workSpace:'water',layerName:'Spring',reference:true,checkName:'泉',icon:"泉",loaded: false},
