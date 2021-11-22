@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
 <div></div>
 <!--	<div id="container">-->
 <!--		<transition :appear="true">-->
@@ -51,7 +50,6 @@
 <!--		<LayerList :layerInfos="layerInfos" @layerShow="layerShow" @flyToArea="flyToArea"></LayerList>-->
 <!--		<LayerSetting ref="layerSetting"></LayerSetting>-->
 <!--	</div>-->
-=======
 	<div style="height: 100%">
 		<a-layout>
 			<!--侧边导航栏-->
@@ -61,7 +59,6 @@
 						<EyeOutlined />
 						<span>要素展示</span>
 					</a-menu-item>
->>>>>>> 2b7e73eef638e7da223cf7e35e4eb63363b396ff
 
 					<a-menu-item key="22" @click="changeSetting">
 						<SettingOutlined />

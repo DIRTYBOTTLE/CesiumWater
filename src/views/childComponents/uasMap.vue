@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import { Vector as SourceVec } from "ol/source";
-import { Feature } from "ol";
-import { Point } from "ol/geom";
-import { Style, Icon } from "ol/style";
-import { Vector as LayerVec } from "ol/layer";
+import { Vector as SourceVec } from "../../../static/ol/source";
+import { Feature } from "../../../static/ol";
+import { Point } from "../../../static/ol/geom";
+import { Style, Icon } from "../../../static/ol/style";
+import { Vector as LayerVec } from "../../../static/ol/layer";
 export default {
   name: "uasMap",
   data() {

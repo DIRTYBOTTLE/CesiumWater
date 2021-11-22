@@ -70,7 +70,7 @@ export default defineComponent({
 		const naviList = [
 			{ name: "三维实景", path: "cesium" },
 			{ name: "水源管理", path: "water" },
-			{ name: "灾情现场感知", path: "suggestion" },
+			{ name: "无人机现场感知", path: "uas" },
 			{ name: "地质气象", path: "geodata" },
 			{ name: "灾害信息", path: "service" },
 			{ name: "危险源", path: "application" },
