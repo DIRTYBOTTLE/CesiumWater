@@ -36,4 +36,8 @@
 .ant-layout-sider-trigger {
 	bottom: unset!important;
 }
+
+.ant-tree-title{
+	color: white!important;
+}
 </style>

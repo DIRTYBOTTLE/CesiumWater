@@ -3,7 +3,6 @@ import * as Cesium from "cesium";
 function getWFS(viewer,layerInfo) {
     const url = 'http://localhost/geoserver/' + layerInfo.workSpace + '/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=' + layerInfo.workSpace + '%3A' + layerInfo.layerName + '&outputFormat=application%2Fjson';
     //viewer.scene.globe.depthTestAgainstTerrain = true;
-
     viewer.dataSources.add(Cesium.GeoJsonDataSource.load(url, {
         clampToGround: true,
         fill:Cesium.Color.AQUA,
@@ -16,17 +15,41 @@ function getWFS(viewer,layerInfo) {
                     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
                     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
                     image: "src/js/"+layerInfo.icon+".png",
-                    width: 22,
-                    height: 22,
+                    width: 20,
+                    height: 20,
                     clampToGround: false
                 });
             }
         }
         dataSource.name=layerInfo.checkName;
-        //dataSource.show=false;
     });
 }
 
+
+function flyToArea(){
+    viewer.camera.flyTo({
+        destination : new Cesium.Cartesian3(-1359527.881887964, 5251080.84182769, 3347486.3154035173),
+        orientation: {
+            heading : 0.6321958327174828,
+            pitch : -0.29359391259896683,
+            //   roll : 0.0                             // default value
+        }
+    });
+}
+
+function layerShow1(layerInfos,id){
+    if(!layerInfos[id].loaded){
+        getWFS(viewer,layerInfos[id]);
+        layerInfos[id].loaded = true;
+        return
+    }
+    if(layerInfos[id].loaded){
+        viewer.dataSources.getByName(layerInfos[id].checkName)[0].show = !viewer.dataSources.getByName(layerInfos[id].checkName)[0].show;
+    }
+}
+
 export {
-    getWFS
+    getWFS,
+    flyToArea,
+    layerShow1
 }

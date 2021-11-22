@@ -70,11 +70,12 @@ export default defineComponent({
 		const naviList = [
 			{ name: "三维实景", path: "cesium" },
 			{ name: "水源管理", path: "water" },
+			{ name: "灾情现场感知", path: "suggestion" },
 			{ name: "地质气象", path: "geodata" },
 			{ name: "灾害信息", path: "service" },
 			{ name: "危险源", path: "application" },
 			{ name: "安全规划", path: "cadviewer" },
-			{ name: "应急决策", path: "suggestion" },
+			{ name: "应急决策", path: "test" },
 			// { name: "个人中心", path: "user" },
 		];
 //

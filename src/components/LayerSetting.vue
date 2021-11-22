@@ -85,9 +85,9 @@ defineExpose({
 	background: rgba(42, 42, 42, 0.8);
 	padding: 4px;
 	border-radius: 4px;
-	margin: 5px;
 	position: absolute;
-	top: 0px;
+	top: 50px;
+	right: 5px;
 	/*right: 0px;*/
 }
 </style>
