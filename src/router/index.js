@@ -17,7 +17,7 @@ const router = createRouter({
             children: [
                 { path: "cesium", name: 'cesium', component: Cesium },
                 { path: "water", name: 'water', component: Water ,children:[{ path: "ganNan", name: 'ganNan', component: GanNan },]},
-
+                { path: "uas", name: "uas", component: uasHome },
             ]
         },
     ]
