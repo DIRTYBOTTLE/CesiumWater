@@ -7,6 +7,7 @@ import Home from '../components/Home.vue'
 import Cesium from '../components/Cesium.vue'
 import Water from '../components/Water.vue'
 import uasHome from "../views/uasHome.vue";
+import GanNan from "../components/pdf/GanNan.vue";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -15,8 +16,8 @@ const router = createRouter({
             component:Home,
             children: [
                 { path: "cesium", name: 'cesium', component: Cesium },
-                { path: "water", name: 'water', component: Water },
-                // { path: "uas", name: 'uas', component: uasHome },
+                { path: "water", name: 'water', component: Water ,children:[{ path: "ganNan", name: 'ganNan', component: GanNan },]},
+
             ]
         },
     ]

@@ -1,204 +1,95 @@
 <template>
-	<div style="overflow:auto;height:100%">
-		222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>
-		222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>
-		222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>
-		222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>
-		222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>222333333<br>
+
+	<div style="height: 100%">
+		<a-layout>
+			<!--侧边导航栏-->
+			<a-layout-sider collapsible="true" defaultCollapsed="true">
+				<a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
+					<a-menu-item key="11" @click="handleClick">
+						<EyeOutlined />
+						<span>要素展示</span>
+					</a-menu-item>
+
+					<a-menu-item key="22" @click="changeSetting">
+						<SettingOutlined />
+						<span>参数调整</span>
+					</a-menu-item>
+
+					<a-sub-menu key="sub2">
+						<template #title>
+							<span>
+              	<EnvironmentOutlined />
+              	<span>示范区</span>
+            	</span>
+						</template>
+						<a-menu-item key="542" @click="flyToArea">绵阳示范区</a-menu-item>
+						<a-sub-menu key="sub3" title="于都示范区">
+							<a-menu-item key="754" @click="flyTo(115.539675,25.997803)">塘贯村</a-menu-item>
+							<a-menu-item key="854" @click="flyTo(115.199193,25.920731)">峡山小学</a-menu-item>
+							<a-menu-item key="894" @click="flyTo(115.194169,25.946653)">峡山村</a-menu-item>
+							<a-menu-item key="834" @click="flyTo(115.320556,25.763056)">长源村</a-menu-item>
+							<a-menu-item key="851" @click="flyTo(115.496744,25.946822)">潭头社区</a-menu-item>
+						</a-sub-menu>
+					</a-sub-menu>
+
+				</a-menu>
+			</a-layout-sider>
+
+			<!--内容展示区-->
+			<a-layout class="things">
+					<div style="height:100%">
+
+				<!-- 路由占位符 -->
+				<router-view v-slot="{ Component }">
+<!--					<router-view>-->
+					<transition>
+						<keep-alive :exclude="['three']">
+							<component :is="Component" />
+						</keep-alive>
+					</transition>
+				</router-view>
+
+<!--						<embed src="src/assets/2020-2021年度技术报告 - 赣南山区找水技术成果报告.pdf" width="100%" height="100%"/>-->
+					</div>
+
+
+
+			</a-layout>
+
+
+		</a-layout>
 	</div>
-<!--	<a-layout :style="{ overflow: 'auto', height: '100%', position: 'fixed', left: 0 , bottom:240}">-->
-<!--		<a-layout-sider >-->
-<!--			<div class="logo" />-->
-<!--			<a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">-->
-<!--				<a-menu-item key="1">-->
-<!--					<user-outlined />-->
-<!--					<span class="nav-text">nav 1</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="2">-->
-<!--					<video-camera-outlined />-->
-<!--					<span class="nav-text">nav 2</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="3">-->
-<!--					<upload-outlined />-->
-<!--					<span class="nav-text">nav 3</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="4">-->
-<!--					<bar-chart-outlined />-->
-<!--					<span class="nav-text">nav 4</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="5">-->
-<!--					<cloud-outlined />-->
-<!--					<span class="nav-text">nav 5</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="6">-->
-<!--					<appstore-outlined />-->
-<!--					<span class="nav-text">nav 6</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="7">-->
-<!--					<team-outlined />-->
-<!--					<span class="nav-text">nav 7</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="8">-->
-<!--					<shop-outlined />-->
-<!--					<span class="nav-text">nav 8</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="8">-->
-<!--					<shop-outlined />-->
-<!--					<span class="nav-text">nav 8</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="8">-->
-<!--					<shop-outlined />-->
-<!--					<span class="nav-text">nav 8</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="8">-->
-<!--					<shop-outlined />-->
-<!--					<span class="nav-text">nav 8</span>-->
-<!--				</a-menu-item>-->
-<!--				<a-menu-item key="8">-->
-<!--					<shop-outlined />-->
-<!--					<span class="nav-text">nav 8</span>-->
-<!--				</a-menu-item><a-menu-item key="8">-->
-<!--				<shop-outlined />-->
-<!--				<span class="nav-text">nav 8</span>-->
-<!--			</a-menu-item>-->
-<!--				<a-menu-item key="8">-->
-<!--					<shop-outlined />-->
-<!--					<span class="nav-text">nav 8</span>-->
-<!--				</a-menu-item><a-menu-item key="8">-->
-<!--				<shop-outlined />-->
-<!--				<span class="nav-text">nav 8</span>-->
-<!--			</a-menu-item>-->
 
-
-
-<!--			</a-menu>-->
-<!--		</a-layout-sider>-->
-<!--		<a-layout :style="{ marginLeft: '200px' }">-->
-<!--			<a-layout-header :style="{ background: '#fff', padding: 0 }" />-->
-<!--			<a-layout-content :style="{ margin: '24px 16px 0', overflow: 'initial' }">-->
-<!--				<div :style="{ padding: '24px', background: '#fff', textAlign: 'center' }">-->
-<!--					...-->
-<!--					<br />-->
-<!--					Really-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					long-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					...-->
-<!--					<br />-->
-<!--					content-->
-<!--				</div>-->
-<!--			</a-layout-content>-->
-<!--			<a-layout-footer :style="{ textAlign: 'center' }">-->
-<!--				Ant Design ©2018 Created by Ant UED-->
-<!--			</a-layout-footer>-->
-<!--		</a-layout>-->
-<!--	</a-layout>-->
 </template>
 
 <script>
-import { UserOutlined, VideoCameraOutlined, UploadOutlined, BarChartOutlined, CloudOutlined, AppstoreOutlined, TeamOutlined, ShopOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-	components: {
-		UserOutlined,
-		VideoCameraOutlined,
-		UploadOutlined,
-		BarChartOutlined,
-		CloudOutlined,
-		AppstoreOutlined,
-		TeamOutlined,
-		ShopOutlined,
-	},
+import { EyeOutlined , SettingOutlined, EnvironmentOutlined } from '@ant-design/icons-vue';
+import {defineComponent} from "vue";
+import { useRouter } from "vue-router";
 
-	setup() {
+export default defineComponent({
+	setup(){
+		const routers = useRouter();
+		const handleClick = () => {
+			routers.push("/water/ganNan");
+		};
 		return {
-			selectedKeys: ref(['4']),
+			// mainKeys,
+			// username,
+			// avatarUrl,
+			// subKeys,
+			handleClick,
+			// goToUser,
+			// exit,
+		};
+	},
+	components: {
+		EyeOutlined,
+		SettingOutlined,
+		EnvironmentOutlined
+	},
+	data() {
+		return {
 		};
 	},
 
@@ -206,16 +97,7 @@ export default defineComponent({
 </script>
 
 <style>
-#components-layout-demo-fixed-sider .logo {
-	height: 32px;
-	background: rgba(255, 255, 255, 0.2);
-	margin: 16px;
-}
-.site-layout .site-layout-background {
-	background: #fff;
-}
-
-[data-theme='dark'] .site-layout .site-layout-background {
-	background: #141414;
+.ant-layout.ant-layout-has-sider {
+	height: 100%;
 }
 </style>

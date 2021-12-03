@@ -33,7 +33,7 @@
 				<!-- 路由占位符 -->
 				<router-view v-slot="{ Component }">
 					<transition>
-						<keep-alive :exclude="['three', 'cad-viewer']">
+						<keep-alive :exclude="[]">
 							<component :is="Component" />
 						</keep-alive>
 					</transition>

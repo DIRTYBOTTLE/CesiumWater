@@ -134,8 +134,40 @@ import LayerSetting from "./LayerSetting.vue";
 
 /**********图层信息**********/
 const layerInfos = [
-	{workSpace:'water',layerName:'WaterSurface',reference:true,checkName:'地表水源',icon:"地表水源",loaded:false},
-	{workSpace:'well',layerName:'JiangXi',reference:true,checkName:'地下水源',icon:"泉",loaded: false},
+	{workSpace:'water',layerName:'WaterSurface',reference:true,checkName:'地表水源',icon:"地表水源",loaded:false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: "src/js/地表水源.png",
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+	{workSpace:'well',layerName:'JiangXi',reference:true,checkName:'地下水源',icon:"泉",loaded: false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: "src/js/泉.png",
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+	{workSpace:'buffer',layerName:'waterSurfaceBuffer',reference:false,checkName:'地下水源',icon:"",loaded: false,
+		options:{
+			// heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			// verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			// clampToGround: false,
+			// color: Cesium.Color.BLACK,
+		}
+	},
+	{workSpace:'buffer',layerName:'JiangXiBuffer',reference:false,checkName:'地下水源',icon:"",loaded: false,
+		options:{
+			// heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			// verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			// clampToGround: false,
+			// color: Cesium.Color.BLACK,
+		}
+	},
 	{workSpace:'water',layerName:'WaterUnder',reference:true,checkName:'地下水源',icon:"地下水源",loaded: false},
 	{workSpace:'geology',layerName:'GeologyYuDu',reference:false,checkName:'于都地质',icon:"",loaded: false},
 	{workSpace:'water',layerName:'Spring',reference:true,checkName:'泉',icon:"泉",loaded: false},
@@ -150,15 +182,34 @@ const treeData = [
 		title: '地表水源',
 		key: '-1',
 		children: [{title: 'I 级水源', key: '0'},
-			{title: 'II 级水源', key: '1'},
-			{title: 'III 级水源', key: '2'}],
+			// {title: 'II 级水源', key: '1'},
+			// {title: 'III 级水源', key: '2'}
+		],
 	},
+	// {
+	// 	title: '地下水源',
+	// 	key: '-2',
+	// 	children: [{title: 'I 级水源', key: '3'},
+	// 		{title: 'II 级水源', key: '4'},
+	// 		{title: 'III 级水源', key: '5'}],
+	// },
+
 	{
-		title: '地下水源',
-		key: '-2',
-		children: [{title: 'I 级水源', key: '3'},
-			{title: 'II 级水源', key: '4'},
-			{title: 'III 级水源', key: '5'}],
+		title: '井位',
+		key: '-3',
+		children: [{title: '赣南示范井', key: '1'},
+			// {title: 'II 级水源', key: '4'},
+			// {title: 'III 级水源', key: '5'}
+		],
+	},
+
+	{
+		title: '缓冲区分析',
+		key: '-4',
+		children: [{title: '地表水源', key: '2'},
+			{title: '赣南示范井', key: '3'},
+			// {title: 'III 级水源', key: '5'}
+		],
 	},
 ];
 /**********图层显示**********/

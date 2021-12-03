@@ -5,20 +5,21 @@ function getWFS(viewer,layerInfo) {
     //viewer.scene.globe.depthTestAgainstTerrain = true;
     viewer.dataSources.add(Cesium.GeoJsonDataSource.load(url, {
         clampToGround: true,
-        fill:Cesium.Color.AQUA,
+        fill:new Cesium.Color(0.5, 0.2, 0.3, 0.5),
     })).then(dataSource => {
         if (layerInfo.reference) {
             const entities = dataSource.entities.values;
             for (let i = 0; i < entities.length; i++) {
                 let entity = entities[i];
-                entity.billboard = new Cesium.BillboardGraphics({
-                    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-                    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-                    image: "src/js/"+layerInfo.icon+".png",
-                    width: 20,
-                    height: 20,
-                    clampToGround: false
-                });
+                // entity.billboard = new Cesium.BillboardGraphics({
+                //     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+                //     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                //     image: "src/js/"+layerInfo.icon+".png",
+                //     width: 20,
+                //     height: 20,
+                //     clampToGround: false
+                // });
+                entity.billboard = new Cesium.BillboardGraphics(layerInfo.options);
             }
         }
         dataSource.name=layerInfo.checkName;
