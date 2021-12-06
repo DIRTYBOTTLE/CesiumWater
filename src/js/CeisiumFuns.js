@@ -1,7 +1,9 @@
 import * as Cesium from "cesium";
 
 function getWFS(viewer,layerInfo) {
-    const url = 'http://localhost/geoserver/' + layerInfo.workSpace + '/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=' + layerInfo.workSpace + '%3A' + layerInfo.layerName + '&outputFormat=application%2Fjson';
+    // const url = 'http://localhost:6060/geoserver/' + layerInfo.workSpace + '/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=' + layerInfo.workSpace + '%3A' + layerInfo.layerName + '&outputFormat=application%2Fjson';
+    const url = 'http://8.130.15.177:6060/geoserver/' + layerInfo.workSpace + '/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=' + layerInfo.workSpace + '%3A' + layerInfo.layerName + '&outputFormat=application%2Fjson';
+    console.log(url);
     //viewer.scene.globe.depthTestAgainstTerrain = true;
     viewer.dataSources.add(Cesium.GeoJsonDataSource.load(url, {
         clampToGround: true,

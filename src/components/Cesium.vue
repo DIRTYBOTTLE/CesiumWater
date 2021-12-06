@@ -131,14 +131,14 @@ import * as Cesium from 'cesium';
 import * as Vue from 'vue';
 import {getWFS,flyToArea,layerShow1,flyTo} from '../js/CeisiumFuns'
 import LayerSetting from "./LayerSetting.vue";
-
+import diBiaoShuiYuanUrl from '../assets/地表水.png'
 /**********图层信息**********/
 const layerInfos = [
 	{workSpace:'water',layerName:'WaterSurface',reference:true,checkName:'地表水源',icon:"地表水源",loaded:false,
 		options:{
 			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
 			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-			image: "src/js/地表水源.png",
+			image: diBiaoShuiYuanUrl,
 			width: 20,
 			height: 20,
 			clampToGround: false}
@@ -147,7 +147,7 @@ const layerInfos = [
 		options:{
 			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
 			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-			image: "src/js/泉.png",
+			// image: "src/js/泉.png",
 			width: 20,
 			height: 20,
 			clampToGround: false}
@@ -243,7 +243,7 @@ const changeSetting = ()=>{
 let viewer;
 const mapRef = Vue.ref(null);
 Vue.onMounted(() => {
-
+	Cesium.Ion.defaultAccessToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyNDg2NzE0Yy1jNTQzLTQ4NWMtODI0My03OTg5NWZiYWY2YjUiLCJpZCI6NzU0MjYsImlhdCI6MTYzODU5NzkyOH0.nMc5nLbF-KZFbOCPyZeiDSHiX5tCDv8brYBZIElPfKs';
   viewer = new Cesium.Viewer(mapRef.value,{
     //baseLayerPicker:true,//右上角图层选择器,默认true
     //imageryProvider:,//底图设置，仅当baseLayerPicker为false时生效，默认为createWorldImagery()
