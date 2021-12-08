@@ -132,6 +132,9 @@ import * as Vue from 'vue';
 import {getWFS,flyToArea,layerShow1,flyTo} from '../js/CeisiumFuns'
 import LayerSetting from "./LayerSetting.vue";
 import diBiaoShuiYuanUrl from '../assets/地表水.png'
+import quanUrl from '../assets/泉.png'
+import jingUrl from '../assets/井.png'
+import zuanJingUrl from '../assets/钻井.png'
 /**********图层信息**********/
 const layerInfos = [
 	{workSpace:'water',layerName:'WaterSurface',reference:true,checkName:'地表水源',icon:"地表水源",loaded:false,
@@ -143,16 +146,54 @@ const layerInfos = [
 			height: 20,
 			clampToGround: false}
 	},
-	{workSpace:'well',layerName:'JiangXi',reference:true,checkName:'地下水源',icon:"泉",loaded: false,
+
+	{workSpace:'well',layerName:'JiangXi',reference:true,checkName:'赣南示范井',icon:"地表水源",loaded: false,
 		options:{
 			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
 			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-			// image: "src/js/泉.png",
+			image: quanUrl,
 			width: 20,
 			height: 20,
 			clampToGround: false}
 	},
-	{workSpace:'buffer',layerName:'waterSurfaceBuffer',reference:false,checkName:'地下水源',icon:"",loaded: false,
+		{workSpace:'well',layerName:'minJin',reference:true,checkName:'民井',icon:"地表水源",loaded: false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: jingUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+		{workSpace:'well',layerName:'tanCai',reference:true,checkName:'探采结合井',icon:"地表水源",loaded: false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: jingUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+		{workSpace:'well',layerName:'zuanKong',reference:true,checkName:'钻孔',icon:"地表水源",loaded: false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: zuanJingUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+		{workSpace:'well',layerName:'quan',reference:true,checkName:'泉',icon:"地表水源",loaded: false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: quanUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+
+	{workSpace:'buffer',layerName:'waterSurfaceBuffer',reference:false,checkName:'地表水源缓冲区',icon:"",loaded: false,
 		options:{
 			// heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
 			// verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
@@ -160,7 +201,7 @@ const layerInfos = [
 			// color: Cesium.Color.BLACK,
 		}
 	},
-	{workSpace:'buffer',layerName:'JiangXiBuffer',reference:false,checkName:'地下水源',icon:"",loaded: false,
+	{workSpace:'buffer',layerName:'JiangXiBuffer',reference:false,checkName:'赣南示范井缓冲区',icon:"",loaded: false,
 		options:{
 			// heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
 			// verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
@@ -168,6 +209,7 @@ const layerInfos = [
 			// color: Cesium.Color.BLACK,
 		}
 	},
+
 	{workSpace:'water',layerName:'WaterUnder',reference:true,checkName:'地下水源',icon:"地下水源",loaded: false},
 	{workSpace:'geology',layerName:'GeologyYuDu',reference:false,checkName:'于都地质',icon:"",loaded: false},
 	{workSpace:'water',layerName:'Spring',reference:true,checkName:'泉',icon:"泉",loaded: false},
@@ -198,16 +240,18 @@ const treeData = [
 		title: '井位',
 		key: '-3',
 		children: [{title: '赣南示范井', key: '1'},
-			// {title: 'II 级水源', key: '4'},
-			// {title: 'III 级水源', key: '5'}
+			{title: '民井', key: '2'},
+			{title: '探采结合井', key: '3'},
+			{title: '钻孔', key: '4'},
+			{title: '泉', key: '5'}
 		],
 	},
 
 	{
 		title: '缓冲区分析',
 		key: '-4',
-		children: [{title: '地表水源', key: '2'},
-			{title: '赣南示范井', key: '3'},
+		children: [{title: '地表水源', key: '6'},
+			{title: '赣南示范井', key: '7'},
 			// {title: 'III 级水源', key: '5'}
 		],
 	},
