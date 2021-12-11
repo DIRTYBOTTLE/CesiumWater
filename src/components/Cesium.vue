@@ -146,6 +146,33 @@ const layerInfos = [
 			height: 20,
 			clampToGround: false}
 	},
+	{workSpace:'water',layerName:'diXiaShuiLeiXin',reference:false,checkName:'地下水类型',icon:"地表水源",loaded:false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: diBiaoShuiYuanUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+	{workSpace:'water',layerName:'kuJiCeLiuDian',reference:true,checkName:'枯季测流点',icon:"地表水源",loaded:false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: diBiaoShuiYuanUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+	{workSpace:'water',layerName:'shuiXi',reference:false,checkName:'水系',icon:"地表水源",loaded:false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: diBiaoShuiYuanUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
 
 	{workSpace:'well',layerName:'JiangXi',reference:true,checkName:'赣南示范井',icon:"地表水源",loaded: false,
 		options:{
@@ -183,7 +210,7 @@ const layerInfos = [
 			height: 20,
 			clampToGround: false}
 	},
-		{workSpace:'well',layerName:'quan',reference:true,checkName:'泉',icon:"地表水源",loaded: false,
+	{workSpace:'well',layerName:'quan',reference:true,checkName:'泉',icon:"地表水源",loaded: false,
 		options:{
 			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
 			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
@@ -210,22 +237,62 @@ const layerInfos = [
 		}
 	},
 
-	{workSpace:'water',layerName:'WaterUnder',reference:true,checkName:'地下水源',icon:"地下水源",loaded: false},
-	{workSpace:'geology',layerName:'GeologyYuDu',reference:false,checkName:'于都地质',icon:"",loaded: false},
-	{workSpace:'water',layerName:'Spring',reference:true,checkName:'泉',icon:"泉",loaded: false},
-	{workSpace:'water',layerName:'Well',reference:true,checkName:'井',icon:"井",loaded: false},
-	{workSpace:'water',layerName:'Drill',reference:true,checkName:'钻井',icon:"钻井",loaded: false},
-	{workSpace:'water',layerName:'WaterLine',reference:false,checkName:'水系',icon:"",loaded: false},
-	{workSpace:'map',layerName:'hjb',reference:true,checkName:'黄家坝',icon:"黄家坝",loaded: false},
+	{workSpace:'shuiWen',layerName:'shuiWenDiZhiPouMianTu',reference:false,checkName:'水文地质剖面图',icon:"",loaded: false,
+		options:{
+		}
+	},
+	{workSpace:'shuiWen',layerName:'shuiWenDiZhiPouMianXian',reference:false,checkName:'水文地质剖面线',icon:"",loaded: false,
+		options:{
+		}
+	},
+	{workSpace:'shuiWen',layerName:'bengTa',reference:true,checkName:'崩塌',icon:"地表水源",loaded: false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: quanUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+	{workSpace:'shuiWen',layerName:'duanLie',reference:true,checkName:'断裂',icon:"地表水源",loaded: false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: quanUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+	{workSpace:'shuiWen',layerName:'diBiaoFenShuiLin',reference:false,checkName:'地表分水岭',icon:"",loaded: false,
+		options:{
+		}
+	},
+	{workSpace:'shuiWen',layerName:'qiXiangZhan',reference:true,checkName:'气象站',icon:"地表水源",loaded: false,
+		options:{
+			heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+			verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+			image: quanUrl,
+			width: 20,
+			height: 20,
+			clampToGround: false}
+	},
+	// {workSpace:'water',layerName:'WaterUnder',reference:true,checkName:'地下水源',icon:"地下水源",loaded: false},
+	// {workSpace:'geology',layerName:'GeologyYuDu',reference:false,checkName:'于都地质',icon:"",loaded: false},
+	// {workSpace:'water',layerName:'Spring',reference:true,checkName:'泉',icon:"泉",loaded: false},
+	// {workSpace:'water',layerName:'Well',reference:true,checkName:'井',icon:"井",loaded: false},
+	// {workSpace:'water',layerName:'Drill',reference:true,checkName:'钻井',icon:"钻井",loaded: false},
+	// {workSpace:'water',layerName:'WaterLine',reference:false,checkName:'水系',icon:"",loaded: false},
+	// {workSpace:'map',layerName:'hjb',reference:true,checkName:'黄家坝',icon:"黄家坝",loaded: false},
 ];
 /**********图层选择器信息**********/
 const treeData = [
 	{
-		title: '地表水源',
+		title: '水源',
 		key: '-1',
-		children: [{title: 'I 级水源', key: '0'},
-			// {title: 'II 级水源', key: '1'},
-			// {title: 'III 级水源', key: '2'}
+		children: [{title: 'I 级地表水源', key: '0'},
+			{title: '地下水类型', key: '1'},
+			{title: '枯季测流点', key: '2'},
+			{title: '水系', key: '3'}
 		],
 	},
 	// {
@@ -239,22 +306,35 @@ const treeData = [
 	{
 		title: '井位',
 		key: '-3',
-		children: [{title: '赣南示范井', key: '1'},
-			{title: '民井', key: '2'},
-			{title: '探采结合井', key: '3'},
-			{title: '钻孔', key: '4'},
-			{title: '泉', key: '5'}
+		children: [{title: '赣南示范井', key: '4'},
+			{title: '民井', key: '5'},
+			{title: '探采结合井', key: '6'},
+			{title: '钻孔', key: '7'},
+			{title: '泉', key: '8'}
 		],
 	},
 
 	{
 		title: '缓冲区分析',
 		key: '-4',
-		children: [{title: '地表水源', key: '6'},
-			{title: '赣南示范井', key: '7'},
+		children: [{title: '地表水源', key: '9'},
+			{title: '赣南示范井', key: '10'},
 			// {title: 'III 级水源', key: '5'}
 		],
 	},
+
+	{
+		title: '水文地质',
+		key: '-5',
+		children: [{title: '水文地质剖面图', key: '11'},
+			{title: '水文地质剖面线', key: '12'},
+			{title: '崩塌', key: '13'},
+			{title: '断裂', key: '14'},
+			{title: '气象站', key: '15'},
+			{title: '地表分水岭', key: '16'},
+		],
+	},
+
 ];
 /**********图层显示**********/
 const layerShow = (checkedKeys,e)=>{
